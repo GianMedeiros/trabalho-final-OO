@@ -4,7 +4,7 @@
 
 Trabalho da disciplina Orientação a Objeto
 
-## integrantes
+## Integrantes
 
 |Matrícula|Nome|Email|
 |---|---|---|
@@ -13,6 +13,10 @@ Trabalho da disciplina Orientação a Objeto
 |190035935|Nathan Pontes Romão|190035935@aluno.unb.br|
 |190116072|Raphaela Guimarães de Araújo dos Santos|190116072@aluno.unb.br|
 |190037423|Rhuan Brandão Guedes Silva|190037423@aluno.unb.br|
+
+## Diagrama de Classes
+
+![UDL](imagens/diagrama.png)
 
 ## Enunciado do trabalho
 
