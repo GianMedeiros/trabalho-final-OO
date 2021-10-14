@@ -1,6 +1,6 @@
 package classes;
 
-public class Despesas {
+public class Despesa {
 	
 	public String categoria;
 	public String descricao;
@@ -13,13 +13,13 @@ public class Despesas {
 		this.descricao = descricaoCadas;
 		this.valor = valorCadas;
 		
-		//Método responsável por cadastrar uma nova categoria.
+		//Mï¿½todo responsï¿½vel por cadastrar uma nova categoria.
 		
 	}	
 	
 	public boolean alterarArquivoDespesas(boolean modo) {
 		
-		//Método responsável por confirmar a adição ou remoção de uma despesa.
+		//Mï¿½todo responsï¿½vel por confirmar a adiï¿½ï¿½o ou remoï¿½ï¿½o de uma despesa.
 		
 		return modo;
 	}
