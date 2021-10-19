@@ -1,0 +1,40 @@
+Pontos positivos: 
+
++ Associação Categoria --> SubCategoria
+
+
+
+
+
+Pontos negativos: 
+
+- Falta a principal classe do problema: Republica (-10%)
+- Pessoa não possui associação com nenhuma classe? (-10%)
+- Onde os objetos de despesa, pessoa são armazenados (referenciados)? (-20%)
+- Onde são realizadas as divisões de despesas segundo as regras igualitarias e
+  proporcional (-10%)
+- Onde são realizados/armazenados os totais de todas as despesas e todos os
+  rendimentos? (-20%)
+- Qual a classe principal da aplicação? 
+
+
+
+Dúvidas: 
+
+
+
+
+
+Comentários: 
+
+O trabalho está em um nível muito inicial ainda. É preciso uma grande
+reformulação e uma grande elaboração do trabalho. É necessário que o grupo se
+reuna para discutirem todas as mudanças necessárias para resolver esses graves
+problemas. Atentem-se quanto ao tempo e ao escopo do que deve ser implementado
+até o fim do semestre. 
+
+
+
+
+Nota: 
+20/100 pontos.
