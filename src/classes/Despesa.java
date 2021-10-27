@@ -2,25 +2,28 @@ package classes;
 
 public class Despesa {
 	
-	public String categoria;
-	public String descricao;
-	public float valor;
+	String descricao;
+	float valor;
+	Categoria novaCat;
 	
-	
-	public void cadastrarDespesa(String categoriaCadas, String descricaoCadas, float valorCadas) {
+	public Despesa(float despesaInf, String descriInf, String categoria) {	
 		
-		this.categoria = categoriaCadas;
-		this.descricao = descricaoCadas;
-		this.valor = valorCadas;
-		
-		//M�todo respons�vel por cadastrar uma nova categoria.
-		
-	}	
-	
-	public boolean alterarArquivoDespesas(boolean modo) {
-		
-		//M�todo respons�vel por confirmar a adi��o ou remo��o de uma despesa.
-		
-		return modo;
+		novaCat = new Categoria(categoria);
+		this.descricao = descriInf;
+		this.valor = despesaInf;	
 	}
+	
+
+	public String getCategoria() {
+		return novaCat.getDescriCat();
+	}
+	
+	public float getValor() {
+		return valor;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
 }

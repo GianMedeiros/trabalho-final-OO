@@ -1,17 +1,18 @@
+package classes;
 
 public class Categoria {
-	public String Subcategoria;
-	public String Descricao;
 	
+	String descricao;
+	//String subcategoria;
+	//boolean existeSubcat;
 	
-	public Categoria (String CadastroSubcategoria, String CadastroDescricao) {
-		this.Subcategoria = CadastroSubcategoria;
-		this.Descricao = CadastroDescricao;
+	public Categoria(String descriInf) {
+		
+		this.descricao = descriInf;
 	}
 	
-	public void cadastrarSubcategoria(){
-		
-		//Método responsável por cadastrar uma subcategoria 
+	public String getDescriCat() {
+		return descricao;
 	}
 
 }
