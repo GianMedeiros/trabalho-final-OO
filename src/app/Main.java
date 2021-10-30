@@ -9,44 +9,87 @@ public class Main {
 
 	public static void main(String[] args) {
 	
-		float opcao;
+		int opcao;
 		Republica novaRepublica = new Republica();
 		
 	do {
 		
-		novaRepublica.calculaRendimento(novaRepublica.cadastraPessoa());
+//		novaRepublica.calculaRendimento(novaRepublica.cadastraaluno());
 		
-		String strOpcao = JOptionPane.showInputDialog("Digite 1 para cadastrar uma nova pessoa ou 0 para ir ao cadastro de despesas:");
-		opcao = Float.parseFloat(strOpcao);
+		String strOpcao = JOptionPane.showInputDialog("Escolha uma opção de ação: \n\n" 
+													+ "(1) Cadastrar aluno.\n"
+													+ "(2) Imprime alunos.\n"
+													+ "(3) Cadastro de despesas.\n"
+													+ "(4) Imprime despesas.\n"
+													+ "(5) Definir regra de negocio.\n "
+													+ "(6) Gravar alunos\n\n"
+													+ "(0) Sair\n");
+		
+		opcao = Integer.parseInt(strOpcao);
+		
+		switch (opcao) {
+		case 1:
+			// cria novo cadastro de alunos
+			novaRepublica.calculaRendimento(novaRepublica.cadastraAluno());
+			
+			break;
+		
+		case 2:
+			// Criar nova despesa
+			novaRepublica.imprimeAlunos();
+			
+			break;
+			
+		case 3:
+			// Criar nova despesa
+			novaRepublica.cadastraDespesa();
+			
+			break;
+			
+		case 4:
+			// Criar nova despesa
+			novaRepublica.imprimeDespesas();
+			
+			break;
+			
+		case 5:
+			// Decidir regra de cobrança de despesas
+			
+			break;
+			
+		case 6:
+			// Decidir regra de cobrança de despesas
+			novaRepublica.gravarArquivoAluno();
+			JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
+			break;
+			
+		case 0:
+			// Decidir regra de cobrança de despesas
+			JOptionPane.showMessageDialog(null, "Fechando o programa!!");
+			
+			break;
+			
+		default:
+			// opcao invalida
+			JOptionPane.showMessageDialog(null, "Opção invalida!!");
+			
+			break;
+		}
 			
 	}while(opcao != 0);
 	
-	novaRepublica.setTotalPessoas();
-	
-	do {
-		
-		novaRepublica.calculaDespesas(novaRepublica.cadastraDespesa());
-		
-		String strOpcao = JOptionPane.showInputDialog("Digite 1 para cadastrar uma nova despesa ou 0 para sair imprimir os dados:");
-		opcao = Float.parseFloat(strOpcao);
-		
-	}while(opcao != 0);
-	
-	//novaRepublica.imprimePessoas();
-	//novaRepublica.imprimeDespesas();
-	regraIgualitaria(novaRepublica);
-	regraProporcional(novaRepublica);
-		
+
 	}
 	
 	public static void regraIgualitaria(Republica novaRepublica) {
 	
-		float porcentagem = (100 / novaRepublica.getTotalPessoas());
-		float valorPago = (novaRepublica.getTotalDespesas() / novaRepublica.getTotalPessoas());
+		float porcentagem = (100 / novaRepublica.getTotalAlunos());
+		float valorPago = (novaRepublica.getTotalDespesas() / novaRepublica.getTotalAlunos());
 		
-		for (int i=0; i<novaRepublica.getPessoas().length; i++) {
-			String resposta = novaRepublica.getPessoas()[i].getNome()
-					+ " dever� pagar a porcentagem de " + porcentagem + "% "
+
+		for (int i=0; i<novaRepublica.getAlunos().size(); i++) {
+			String resposta = novaRepublica.getAlunos().get(i).getNome()
+					+ " devera pagar a porcentagem de " + porcentagem + "% "
 					+ "ou R$ " + valorPago;
 			
 			JOptionPane.showMessageDialog(null, resposta);
@@ -58,12 +101,12 @@ public class Main {
 		float porcentagem;
 		float valorPago;
 		
-		for (int i=0; i<novaRepublica.getPessoas().length; i++) {
-			porcentagem = (novaRepublica.getPessoas()[i].getRendimentos() * 100) / novaRepublica.getRendimentoTotal();
+		for (int i=0; i<novaRepublica.getAlunos().size(); i++) {
+			porcentagem = (novaRepublica.getAlunos().get(i).getRendimentos() * 100) / novaRepublica.getRendimentoTotal();
 			valorPago = (porcentagem * novaRepublica.getTotalDespesas()) / 100;
 			
-			String resposta = novaRepublica.getPessoas()[i].getNome()
-					+ " dever� pagar a porcentagem de " + porcentagem + "% "
+			String resposta = novaRepublica.getAlunos().get(i).getNome()
+					+ " devera pagar a porcentagem de " + porcentagem + "% "
 					+ "ou R$ " + valorPago;
 				
 			JOptionPane.showMessageDialog(null, resposta);

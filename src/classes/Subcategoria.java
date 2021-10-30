@@ -9,5 +9,8 @@ public class Subcategoria {
 		this.subcategoria = subcatInf;
 		
 	}
-
+	
+	public String getSubcategoria() {
+		return subcategoria;
+	}
 }

@@ -1,49 +1,23 @@
 package classes;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Republica {
 	
-	Pessoa[] pessoas = new Pessoa[0];
+	List<Aluno> alunos;
 	Despesa[] despesas = new Despesa[0];
-	float totalDespesas = 0;
-	int totalPessoas = 0;
-	float rendimentoTotal = 0;
+	private float totalDespesas = 0;
+	private float rendimentoTotal = 0;
+	String nomeArquivoAlunos = "alunos.txt";
 	
 	public Republica() {
-		
+		alunos = new LinkedList<Aluno>();
 	}
-	
-	public void calculaDespesas(float novaDespesa) {
-		
-		totalDespesas = totalDespesas + novaDespesa;
-	}
-	
-	public void calculaRendimento(float novoRendimento) {
-		
-		rendimentoTotal = rendimentoTotal + novoRendimento;
-	}
-	
-	public float getTotalDespesas() {
-		return totalDespesas;
-	}
-
-	public void setTotalPessoas() {
-		this.totalPessoas = pessoas.length;
-	}
-	
-	public int getTotalPessoas() {
-		return totalPessoas;
-	}
-	
-	public float getRendimentoTotal() {
-		return rendimentoTotal;
-	}
-	
-	public Pessoa[] getPessoas() {
-		return pessoas;
-	}
-
 
 	public float cadastraDespesa() {
 		
@@ -64,36 +38,34 @@ public class Republica {
 		return vDespesa;
 	}
 	
-	public float cadastraPessoa() {
+	public float cadastraAluno() {
 		
-		String strNome = JOptionPane.showInputDialog("Informe o nome da pessoa:");
-		String strEmail = JOptionPane.showInputDialog("Informe o email da pessoa:");
-		String strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos da pessoa:");
+		String strNome = JOptionPane.showInputDialog("Informe o nome da aluno:");
+		String strEmail = JOptionPane.showInputDialog("Informe o email da aluno:");
+		String strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos do aluno:");
+		
 		float vRendimentos = Float.parseFloat(strRendimentos);
-		Pessoa p = new Pessoa(strNome, strEmail, vRendimentos);
 		
-		Pessoa[] temp1 = new Pessoa[pessoas.length + 1];
-		for (int i=0; i<pessoas.length; i++) {
-			temp1[i] = pessoas[i];
-		}
+		Aluno a = new Aluno(strNome, strEmail, vRendimentos);
 		
-		temp1[pessoas.length] = p;
-		pessoas = temp1;
+		boolean resposta = alunos.add(a);
+		if (resposta)
+			JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
 		
 		return vRendimentos;
 	}
 	
-	public void imprimePessoas() {
+	public void imprimeAlunos() {
 		
-		for (int i=0; i<pessoas.length; i++) {
-			String resposta = "Nome da pessoa: " + pessoas[i].getNome() + "\n"
-					+ "Email: " + pessoas[i].getEmail() + "\n"
-					+ "Redimentos totais: " + pessoas[i].getRendimentos();
+		for (Aluno p: alunos) {
+			String resposta = "Nome do aluno: " + p.getNome() + "\n"
+					+ "Email: " + p.getEmail() + "\n"
+					+ "Redimentos totais: " + p.getRendimentos();
 				
 			JOptionPane.showMessageDialog(null, resposta);
 	}
 	
-		String resposta2 = "Numero de moradores: " + totalPessoas + "\n"; 		
+		String resposta2 = "Numero de moradores: " + Aluno.getTotalAlunos()+ "\n"; 		
 		JOptionPane.showMessageDialog(null, resposta2);
 		
 		String resposta3 = "Rendimento total da republica: " + rendimentoTotal + "\n"; 		
@@ -112,6 +84,57 @@ public class Republica {
 		
 		String resposta2 = "Valor total das despesas: " + totalDespesas + "\n"; 		
 		JOptionPane.showMessageDialog(null, resposta2);
+	}
+	
+	public void gravarArquivoAluno() {
+		// Metodo para adicionar aluno ao arquivo alunos.txt
+		BufferedWriter buffer = null;
+		FileWriter out = null;
+		
+		try {
+			out = new FileWriter(nomeArquivoAlunos);
+			buffer = new BufferedWriter(out);
+			
+			for (Aluno p : alunos) {
+				buffer.write(p.toString());
+				buffer.write('\n');
+			}
+			
+			buffer.close();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
+	}
+	
+	public void alteraArquivoDespesa(boolean modo, Despesa DespesaAlvo) {
+		// Metodo para ou adicionar ou retirar despesa do arquivo despesa.txt
+	}
+
+	public void calculaDespesas(float novaDespesa) {
+		
+		totalDespesas += novaDespesa;
+	}
+	
+	public void calculaRendimento(float novoRendimento) {
+		
+		rendimentoTotal += novoRendimento;
+	}
+	
+	public float getTotalDespesas() {
+		return totalDespesas;
+	}
+	
+	public int getTotalAlunos() {
+		return Aluno.getTotalAlunos();
+	}
+	
+	public float getRendimentoTotal() {
+		return rendimentoTotal;
+	}
+	
+	public List<Aluno> getAlunos() {
+		return alunos;
 	}
 
 
