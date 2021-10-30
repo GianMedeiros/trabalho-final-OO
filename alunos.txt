@@ -1,1 +1,3 @@
-aaaa;aaa;12.0
+rapha;rapha@test;20.0
+gian;gian@test;10.0
+cleiton;cleiton@test;5.0

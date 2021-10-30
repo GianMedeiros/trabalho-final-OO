@@ -3,10 +3,10 @@ package classes;
 public class Despesa {
 	
 	String descricao;
-	float valor;
+	double valor;
 	Categoria novaCat;
 	
-	public Despesa(float despesaInf, String descriInf, String categoria) {	
+	public Despesa(double despesaInf, String descriInf, String categoria) {	
 		
 		novaCat = new Categoria(categoria);
 		this.descricao = descriInf;
@@ -18,7 +18,7 @@ public class Despesa {
 		return novaCat.getDescriCat();
 	}
 	
-	public float getValor() {
+	public double getValor() {
 		return valor;
 	}
 	

@@ -4,16 +4,18 @@ public class Aluno {
 	
 	private String nome;
 	private String email;
-	private float rendimentos;
+	private double rendimentos;
 	private static int totalAlunos;
+	private static double totalRendimentos;
 	
-	public Aluno(String nomeInf, String emailInf, float rendInf) {
+	public Aluno(String nomeInf, String emailInf, double rendInf) {
 		// Metodo construtor da classe Aluno
 		
-		totalAlunos++;
 		this.nome = nomeInf;
 		this.email = emailInf;
 		this.rendimentos = rendInf;
+		totalAlunos++;
+		totalRendimentos += rendInf;
 		
 	}
 
@@ -25,11 +27,11 @@ public class Aluno {
 		return email;
 	}
 
-	public float getRendimentos() {	
+	public double getRendimentos() {	
 		return rendimentos;
 	}
 	
-	public void setRendimentos(float rendimentos) {
+	public void setRendimentos(double rendimentos) {
 		// Funcao para alterar o rendimento da aluno
 		
 		this.rendimentos = rendimentos;
@@ -37,6 +39,10 @@ public class Aluno {
 	
 	public static int getTotalAlunos() {
 		return Aluno.totalAlunos;
+	}
+	
+	public static double getTotalRendimentos() {
+		return Aluno.totalRendimentos;
 	}
 	
 	public static void alterarTotalAlunos(boolean modo) {
@@ -49,7 +55,7 @@ public class Aluno {
 
 	@Override
 	public String toString() {
-		return nome + ';' + email + ';' + rendimentos;
+		return nome + ";" + email + ";" + rendimentos;
 	}
 
 }
