@@ -81,6 +81,8 @@ public class Main {
 
 	}
 	
+	
+	// Passar este metodo para a classe republica
 	public static void regraIgualitaria(Republica novaRepublica) {
 	
 		float porcentagem = (100 / novaRepublica.getTotalAlunos());
@@ -95,7 +97,9 @@ public class Main {
 			JOptionPane.showMessageDialog(null, resposta);
 		}
 	}
+
 	
+	// Passar este metodo para a classe republica
 	public static void regraProporcional(Republica novaRepublica) {
 		
 		float porcentagem;
