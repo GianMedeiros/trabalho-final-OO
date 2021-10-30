@@ -49,9 +49,10 @@ public class Republica {
 		
 		String strDescricao = JOptionPane.showInputDialog("Informe a descricao da despesa:");
 		String strCategoria = JOptionPane.showInputDialog("Informe a categoria da despesa:");
+		String strSubcategoria = JOptionPane.showInputDialog("Informe a subcategoria da despesa (caso não tenha, deixe em branco):");
 		String strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
 		float vDespesa = Float.parseFloat(strValorDespesa);
-		Despesa d = new Despesa(vDespesa, strDescricao, strCategoria);
+		Despesa d = new Despesa(vDespesa, strDescricao, strCategoria, strSubcategoria);
 
 		Despesa[] temp2 = new Despesa[despesas.length + 1];
 		for (int i=0; i<despesas.length; i++) {
@@ -104,7 +105,8 @@ public class Republica {
 		
 		for (int i=0; i<despesas.length; i++) {
 			String resposta = "Despesa '" + despesas[i].getDescricao() + "' "
-					+ "da categoria '" + despesas[i].getCategoria() + "'\n"
+					+ "da categoria '" + despesas[i].getCategoria()
+					+ "' (" + despesas[i].getNovaCat().getSubcat() + ")\n"
 					+ "valor: " + despesas[i].getValor() + "\n";
 					
 			JOptionPane.showMessageDialog(null, resposta);

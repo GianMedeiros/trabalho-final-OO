@@ -6,9 +6,9 @@ public class Despesa {
 	float valor;
 	Categoria novaCat;
 	
-	public Despesa(float despesaInf, String descriInf, String categoria) {	
+	public Despesa(float despesaInf, String descriInf, String categoria, String subcategoria) {	
 		
-		novaCat = new Categoria(categoria);
+		novaCat = new Categoria(categoria, subcategoria);
 		this.descricao = descriInf;
 		this.valor = despesaInf;	
 	}
@@ -16,6 +16,10 @@ public class Despesa {
 
 	public String getCategoria() {
 		return novaCat.getDescriCat();
+	}
+	
+	public Categoria getNovaCat() {
+		return novaCat;
 	}
 	
 	public float getValor() {
