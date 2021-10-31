@@ -2,12 +2,14 @@ package classes;
 
 public class Despesa {
 	
+
 	private String descricaoDespesa;
 	private double valor;
 	private Categoria novaCat;
 	private static double totalDespesas;
 	
 	public Despesa(String descriInf, String categoria, String subcategoria, double despesaInf) {	
+
 		
 		novaCat = new Categoria(categoria, subcategoria);
 		this.descricaoDespesa = descriInf;
@@ -20,6 +22,7 @@ public class Despesa {
 		return novaCat.getDescriCat();
 	}
 	
+
 	public Categoria getNovaCat() {
 		return novaCat;
 	}

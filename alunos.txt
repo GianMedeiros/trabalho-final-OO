@@ -1,3 +1,0 @@
-rapha;rapha@test;2000.0
-gian;gian@test;1000.0
-cleiton;cleiton@test;500.0

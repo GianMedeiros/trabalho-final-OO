@@ -13,12 +13,14 @@ public class Republica {
 	
 	List<Aluno> alunos;
 	Despesa[] despesas = new Despesa[0];
+
 	String arquivoAlunos = "alunos.txt";
 	String arquivoDespesas = "despesas.txt";
 	
 	public Republica() {
 		alunos = new LinkedList<Aluno>();
 	}
+
 
 	public void cadastraDespesa(boolean info, String strDescricao, String strCategoria, String strSubcategoria, String strValorDespesa) {
 		
@@ -32,6 +34,7 @@ public class Republica {
 		
 		float vDespesa = Float.parseFloat(strValorDespesa);
 		Despesa d = new Despesa(strDescricao, strCategoria, strSubcategoria, vDespesa);
+
 
 		Despesa[] temp2 = new Despesa[despesas.length + 1];
 		for (int i=0; i<despesas.length; i++) {
@@ -49,16 +52,80 @@ public class Republica {
 		}
 		
 	}
-	
+
+	public class DadosPessoaisIncompletosException extends Exception { 
+		public DadosPessoaisIncompletosException() {
+		}
+	}
+	public class RendimentoInvalidoException extends Exception { 
+		public RendimentoInvalidoException() {
+		}
+	}
+	boolean isNumber(String numero) {
+		if (numero == null) {
+			return false;
+		}
+		try {
+			double d = Double.parseDouble(numero);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
+	}
+
 	public void cadastraAluno(boolean info, String strNome, String strEmail, String strRendimentos) {
 		
 		
 		if (!info) {
-			strNome = JOptionPane.showInputDialog("Informe o nome da aluno:");
-			strEmail = JOptionPane.showInputDialog("Informe o email da aluno:");
-			strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos do aluno:");
+				try{
+					strNome = JOptionPane.showInputDialog("Informe o nome do aluno:");
+					strEmail = JOptionPane.showInputDialog("Informe o email do aluno:");
+					strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos do aluno:");
+
+					if(strNome.isEmpty()||strEmail.isEmpty()||strRendimentos.isEmpty())
+					{
+						throw new DadosPessoaisIncompletosException();
+					}
+					else if(Double.parseDouble(strRendimentos)<0)
+					{
+						throw new RendimentoInvalidoException();
+					}
+								
+				double vRendimentos = Double.parseDouble(strRendimentos);
+				
+				Aluno a = new Aluno(strNome, strEmail, vRendimentos);
+				
+				boolean resposta = alunos.add(a);
+				if (resposta) {
+					
+					if(!info) {
+						
+						JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
+						gravarArquivoAluno();
+						JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
+					}
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "Erro em cadastrar aluno!!");
+					}
+				}
+				catch(DadosPessoaisIncompletosException dp)
+				{
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+				}
+				catch(RendimentoInvalidoException ri)
+				{
+					JOptionPane.showMessageDialog(null, "Rendimento invalido!");
+				}
+				catch(NumberFormatException nf)
+				{
+					JOptionPane.showMessageDialog(null, "Rendimento invalido!");
+				}
 		}
+
+
 		
+
 		double vRendimentos = Double.parseDouble(strRendimentos);
 		
 		Aluno a = new Aluno(strNome, strEmail, vRendimentos);
@@ -87,6 +154,7 @@ public class Republica {
 					+ "Redimentos totais: " + p.getRendimentos();
 				
 			JOptionPane.showMessageDialog(null, resposta);
+
 		}
 		
 			String resposta2 = "Numero de moradores: " + Aluno.getTotalAlunos()+ "\n"; 		
@@ -94,6 +162,7 @@ public class Republica {
 			
 			String resposta3 = "Rendimento total da republica: " + Aluno.getTotalRendimentos() + "\n"; 		
 			JOptionPane.showMessageDialog(null, resposta3);
+
 	}
 	
 	public void imprimeDespesas() {
@@ -110,19 +179,22 @@ public class Republica {
 		String resposta2 = "Valor total das despesas: " + Despesa.getTotalDespesas() + "\n"; 		
 		JOptionPane.showMessageDialog(null, resposta2);
 	}
-	
+
 	// Função ainda não implementada
 	public void imprimeCategorias() {
 		
 	}
 	
+
 	public boolean gravarArquivoAluno() {
 		// Metodo para adicionar aluno ao arquivo alunos.txt
 		BufferedWriter buffer = null;
 		FileWriter out = null;
 		
 		try {
+
 			out = new FileWriter(arquivoAlunos);
+
 			buffer = new BufferedWriter(out);
 			
 			for (Aluno p : alunos) {
@@ -147,7 +219,9 @@ public class Republica {
 		String linha = null;
 		
 		try {
+
 			in = new FileReader(arquivoAlunos);
+
 			buffer = new BufferedReader(in);
 		
 			do {
@@ -173,6 +247,7 @@ public class Republica {
 		return false;
 	}
 	
+
 	public boolean gravarArquivoDespesas() {
 		// Metodo para adicionar aluno ao arquivo alunos.txt
 		BufferedWriter buffer = null;
@@ -234,6 +309,7 @@ public class Republica {
 	
 	public double getTotalDespesas() {
 		return Despesa.getTotalDespesas();
+
 	}
 	
 	public int getTotalAlunos() {

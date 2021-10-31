@@ -37,7 +37,7 @@ public class Main {
 													+ "(5) Imprime despesas.\n"
 													+ "(6) Calcular pagamento.\n\n"
 													+ "(0) Sair\n");
-		
+	
 		opcao = Integer.parseInt(strOpcao);
 		
 		switch (opcao) {
@@ -72,7 +72,6 @@ public class Main {
 			break;
 			
 		case 6:
-			
 			do {
 				
 				String strregraDeNegocio = JOptionPane.showInputDialog("Escolha o modo de cobrança:\n\n"
@@ -90,10 +89,10 @@ public class Main {
 					
 					break;
 				
-				case 2:
+          case 2:
 					 // regra Proporcional
 					regraProporcional(novaRepublica);
-					
+
 					break;
 				
 				case 0:
@@ -104,7 +103,9 @@ public class Main {
 				
 				default:
 					// opcao invalida
+
 					JOptionPane.showMessageDialog(null, "Opção invalida!!");
+
 					
 					break;
 						
@@ -125,8 +126,9 @@ public class Main {
 			
 		default:
 			// opcao invalida
+
 			JOptionPane.showMessageDialog(null, "Opção invalida!!");
-			
+
 			break;
 		}
 			
@@ -138,8 +140,9 @@ public class Main {
 	public static void regraIgualitaria(Republica novaRepublica) {
 		double porcentagem = (100.0 / novaRepublica.getTotalAlunos());
 		double valorPago = (novaRepublica.getTotalDespesas() / novaRepublica.getTotalAlunos());
-		
+
 		// formatando resposta
+
 		String strporcentagem = String.format("%.2f", porcentagem);
 		String strvalorPago = String.format("%.2f", valorPago);
 
@@ -151,7 +154,7 @@ public class Main {
 			JOptionPane.showMessageDialog(null, resposta);
 		}
 	}
-	
+
 	public static void regraProporcional(Republica novaRepublica) {
 		
 		for (int i=0; i<novaRepublica.getAlunos().size(); i++) {
