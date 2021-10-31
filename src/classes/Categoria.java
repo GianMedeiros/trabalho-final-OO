@@ -2,17 +2,25 @@ package classes;
 
 public class Categoria {
 	
-	String descricao;
-	//String subcategoria;
-	//boolean existeSubcat;
+	String descricaoCategoria;
+	Subcategoria subcategoria;
 	
-	public Categoria(String descriInf) {
+	public Categoria(String descriInf, String subcatInf) {
 		
-		this.descricao = descriInf;
+		this.descricaoCategoria = descriInf;	
+		if(subcatInf != " ") {
+			subcategoria = new Subcategoria(subcatInf);
+		}
+		
 	}
 	
 	public String getDescriCat() {
-		return descricao;
+		return descricaoCategoria;
 	}
+	
+	public String getSubcat() {
+		return subcategoria.getSubcategoria();
+	}
+	
 
 }

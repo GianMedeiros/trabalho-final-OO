@@ -13,20 +13,28 @@ public class Republica {
 	
 	List<Aluno> alunos;
 	Despesa[] despesas = new Despesa[0];
-	private double totalDespesas = 0;
-	String nomeArquivoAlunos = "alunos.txt";
+
+	String arquivoAlunos = "alunos.txt";
+	String arquivoDespesas = "despesas.txt";
 	
 	public Republica() {
 		alunos = new LinkedList<Aluno>();
 	}
 
-	public double cadastraDespesa() {
+
+	public void cadastraDespesa(boolean info, String strDescricao, String strCategoria, String strSubcategoria, String strValorDespesa) {
 		
-		String strDescricao = JOptionPane.showInputDialog("Informe a descricao da despesa:");
-		String strCategoria = JOptionPane.showInputDialog("Informe a categoria da despesa:");
-		String strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
-		double vDespesa = Double.parseDouble(strValorDespesa);
-		Despesa d = new Despesa(vDespesa, strDescricao, strCategoria);
+		if (!info) {
+			strDescricao = JOptionPane.showInputDialog("Informe a descricao da despesa:");
+			strCategoria = JOptionPane.showInputDialog("Informe a categoria da despesa:");
+			strSubcategoria = JOptionPane.showInputDialog("Informe a subcategoria da despesa (caso nao tenha, deixe em branco):");
+			strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
+			
+		}
+		
+		float vDespesa = Float.parseFloat(strValorDespesa);
+		Despesa d = new Despesa(strDescricao, strCategoria, strSubcategoria, vDespesa);
+
 
 		Despesa[] temp2 = new Despesa[despesas.length + 1];
 		for (int i=0; i<despesas.length; i++) {
@@ -35,9 +43,16 @@ public class Republica {
 		
 		temp2[despesas.length] = d;
 		despesas = temp2;
+
+		if(!info) {
+			JOptionPane.showMessageDialog(null, "Despesa cadastrada com sucesso");
+			gravarArquivoDespesas();
+			JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
+			
+		}
 		
-		return vDespesa;
 	}
+
 	public class DadosPessoaisIncompletosException extends Exception { 
 		public DadosPessoaisIncompletosException() {
 		}
@@ -110,6 +125,25 @@ public class Republica {
 
 
 		
+
+		double vRendimentos = Double.parseDouble(strRendimentos);
+		
+		Aluno a = new Aluno(strNome, strEmail, vRendimentos);
+		
+		boolean resposta = alunos.add(a);
+		if (resposta) {
+			
+			if(!info) {
+				
+				JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
+				gravarArquivoAluno();
+				JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
+			}
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro em cadastrar aluno!!");
+		}
+		
 	}
 	
 	public void imprimeAlunos() {
@@ -120,36 +154,47 @@ public class Republica {
 					+ "Redimentos totais: " + p.getRendimentos();
 				
 			JOptionPane.showMessageDialog(null, resposta);
-	}
-	
-		String resposta2 = "Numero de moradores: " + Aluno.getTotalAlunos()+ "\n"; 		
-		JOptionPane.showMessageDialog(null, resposta2);
+
+		}
 		
-		String resposta3 = "Rendimento total da republica: " + Aluno.getTotalRendimentos() + "\n"; 		
-		JOptionPane.showMessageDialog(null, resposta3);
+			String resposta2 = "Numero de moradores: " + Aluno.getTotalAlunos()+ "\n"; 		
+			JOptionPane.showMessageDialog(null, resposta2);
+			
+			String resposta3 = "Rendimento total da republica: " + Aluno.getTotalRendimentos() + "\n"; 		
+			JOptionPane.showMessageDialog(null, resposta3);
+
 	}
 	
 	public void imprimeDespesas() {
 		
 		for (int i=0; i<despesas.length; i++) {
 			String resposta = "Despesa '" + despesas[i].getDescricao() + "' "
-					+ "da categoria '" + despesas[i].getCategoria() + "'\n"
+					+ "da categoria '" + despesas[i].getCategoria()
+					+ "' (" + despesas[i].getNovaCat().getSubcat() + ")\n"
 					+ "valor: " + despesas[i].getValor() + "\n";
 					
 			JOptionPane.showMessageDialog(null, resposta);
 		}
 		
-		String resposta2 = "Valor total das despesas: " + totalDespesas + "\n"; 		
+		String resposta2 = "Valor total das despesas: " + Despesa.getTotalDespesas() + "\n"; 		
 		JOptionPane.showMessageDialog(null, resposta2);
 	}
+
+	// Função ainda não implementada
+	public void imprimeCategorias() {
+		
+	}
 	
+
 	public boolean gravarArquivoAluno() {
 		// Metodo para adicionar aluno ao arquivo alunos.txt
 		BufferedWriter buffer = null;
 		FileWriter out = null;
 		
 		try {
-			out = new FileWriter(nomeArquivoAlunos);
+
+			out = new FileWriter(arquivoAlunos);
+
 			buffer = new BufferedWriter(out);
 			
 			for (Aluno p : alunos) {
@@ -174,7 +219,9 @@ public class Republica {
 		String linha = null;
 		
 		try {
-			in = new FileReader(nomeArquivoAlunos);
+
+			in = new FileReader(arquivoAlunos);
+
 			buffer = new BufferedReader(in);
 		
 			do {
@@ -200,18 +247,69 @@ public class Republica {
 		return false;
 	}
 	
-	public void alteraArquivoDespesa(boolean modo, Despesa DespesaAlvo) {
-		// Metodo para ou adicionar ou retirar despesa do arquivo despesa.txt
-	}
 
-	public void calculaDespesas(double novaDespesa) {
+	public boolean gravarArquivoDespesas() {
+		// Metodo para adicionar aluno ao arquivo alunos.txt
+		BufferedWriter buffer = null;
+		FileWriter out = null;
 		
-		totalDespesas += novaDespesa;
+		
+		
+		try {
+			out = new FileWriter(arquivoDespesas);
+			buffer = new BufferedWriter(out);
+			
+			for (Despesa d : despesas) {
+				buffer.write(d.toString());
+				buffer.write('\n');
+			}
+			
+			buffer.close();
+			return true;
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null,"erro ao gravar a DESPESA no arquivo" + e.getMessage());
+			return false;
+		}
+		
 	}
 	
+	public boolean lerArquivoDespesas() {
+		
+		BufferedReader buffer = null;
+		FileReader in = null;
+		
+		String linha = null;
+		
+		try {
+			in = new FileReader(arquivoDespesas);
+			buffer = new BufferedReader(in);
+		
+			do {
+				linha = buffer.readLine();
+				
+				if (linha != null) {
+					String[] registro = linha.split(";");
+					cadastraDespesa(true, registro[0], registro[1], registro[2], registro[3]);
+				}
+			} while (linha != null);
+			
+			buffer.close();
+			
+			return true;
+		} catch (IOException ex) {
+			String mensagem = "Erro na leitura de arquivo despesa.txt: " + ex.getMessage();
+			JOptionPane.showMessageDialog(null, mensagem);
+			ex.printStackTrace();
+		}
+		
+		
+		
+		return false;
+	}
 	
 	public double getTotalDespesas() {
-		return totalDespesas;
+		return Despesa.getTotalDespesas();
+
 	}
 	
 	public int getTotalAlunos() {

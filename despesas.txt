@@ -1,0 +1,3 @@
+NET;internet;telefone fixo + internet;2000.0
+moradia;aluguel;condominio + energia;300.0
+Comida;geral;;200.0
