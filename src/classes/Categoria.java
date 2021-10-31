@@ -2,12 +2,12 @@ package classes;
 
 public class Categoria {
 	
-	String descricao;
+	String descricaoCategoria;
 	Subcategoria subcategoria;
 	
 	public Categoria(String descriInf, String subcatInf) {
 		
-		this.descricao = descriInf;	
+		this.descricaoCategoria = descriInf;	
 		if(subcatInf != " ") {
 			subcategoria = new Subcategoria(subcatInf);
 		}
@@ -15,7 +15,7 @@ public class Categoria {
 	}
 	
 	public String getDescriCat() {
-		return descricao;
+		return descricaoCategoria;
 	}
 	
 	public String getSubcat() {

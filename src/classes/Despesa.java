@@ -2,15 +2,17 @@ package classes;
 
 public class Despesa {
 	
-	String descricao;
-	float valor;
-	Categoria novaCat;
+	private String descricaoDespesa;
+	private double valor;
+	private Categoria novaCat;
+	private static double totalDespesas;
 	
-	public Despesa(float despesaInf, String descriInf, String categoria, String subcategoria) {	
+	public Despesa(String descriInf, String categoria, String subcategoria, double despesaInf) {	
 		
 		novaCat = new Categoria(categoria, subcategoria);
-		this.descricao = descriInf;
-		this.valor = despesaInf;	
+		this.descricaoDespesa = descriInf;
+		this.valor = despesaInf;
+		totalDespesas += despesaInf;
 	}
 	
 
@@ -22,12 +24,22 @@ public class Despesa {
 		return novaCat;
 	}
 	
-	public float getValor() {
+	public double getValor() {
 		return valor;
 	}
 	
 	public String getDescricao() {
-		return descricao;
+		return descricaoDespesa;
+	}
+	
+	
+	public static double getTotalDespesas() {
+		return Despesa.totalDespesas;
+	}	
+
+	@Override
+	public String toString() {
+		return descricaoDespesa + ";" + novaCat.getDescriCat() + ";" + novaCat.subcategoria.getSubcategoria() + ";" + valor;
 	}
 	
 }
