@@ -38,33 +38,77 @@ public class Republica {
 		
 		return vDespesa;
 	}
-	
+	public class DadosPessoaisIncompletosException extends Exception { 
+		public DadosPessoaisIncompletosException() {
+		}
+	}
+	public class RendimentoInvalidoException extends Exception { 
+		public RendimentoInvalidoException() {
+		}
+	}
+	boolean isNumber(String numero) {
+		if (numero == null) {
+			return false;
+		}
+		try {
+			double d = Double.parseDouble(numero);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
+	}
+
 	public void cadastraAluno(boolean info, String strNome, String strEmail, String strRendimentos) {
 		
 		
 		if (!info) {
-			strNome = JOptionPane.showInputDialog("Informe o nome da aluno:");
-			strEmail = JOptionPane.showInputDialog("Informe o email da aluno:");
-			strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos do aluno:");
-		}
-		
-		double vRendimentos = Double.parseDouble(strRendimentos);
-		
-		Aluno a = new Aluno(strNome, strEmail, vRendimentos);
-		
-		boolean resposta = alunos.add(a);
-		if (resposta) {
-			
-			if(!info) {
+				try{
+					strNome = JOptionPane.showInputDialog("Informe o nome do aluno:");
+					strEmail = JOptionPane.showInputDialog("Informe o email do aluno:");
+					strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos do aluno:");
+
+					if(strNome.isEmpty()||strEmail.isEmpty()||strRendimentos.isEmpty())
+					{
+						throw new DadosPessoaisIncompletosException();
+					}
+					else if(Double.parseDouble(strRendimentos)<0)
+					{
+						throw new RendimentoInvalidoException();
+					}
+								
+				double vRendimentos = Double.parseDouble(strRendimentos);
 				
-				JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
-				gravarArquivoAluno();
-				JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
-			}
-			
-		} else {
-			JOptionPane.showMessageDialog(null, "Erro em cadastrar aluno!!");
+				Aluno a = new Aluno(strNome, strEmail, vRendimentos);
+				
+				boolean resposta = alunos.add(a);
+				if (resposta) {
+					
+					if(!info) {
+						
+						JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
+						gravarArquivoAluno();
+						JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
+					}
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "Erro em cadastrar aluno!!");
+					}
+				}
+				catch(DadosPessoaisIncompletosException dp)
+				{
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+				}
+				catch(RendimentoInvalidoException ri)
+				{
+					JOptionPane.showMessageDialog(null, "Rendimento invalido!");
+				}
+				catch(NumberFormatException nf)
+				{
+					JOptionPane.showMessageDialog(null, "Rendimento invalido!");
+				}
 		}
+
+
 		
 	}
 	

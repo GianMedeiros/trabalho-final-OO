@@ -16,20 +16,20 @@ public class Main {
 	if (novaRepublica.lerArquivoAluno()) {
 		JOptionPane.showMessageDialog(null, "Leitura total realizada com sucesso!!");
 	} else {
-		JOptionPane.showMessageDialog(null, "Erro no leitura total do arquivo!!");
+		JOptionPane.showMessageDialog(null, "Erro na leitura total do arquivo!!");
 	}
 		
 	do {
 		
 //		novaRepublica.calculaRendimento(novaRepublica.cadastraaluno());
 		
-		String strOpcao = JOptionPane.showInputDialog("Escolha uma opção de ação: \n\n" 
+		String strOpcao = JOptionPane.showInputDialog("Escolha o que deseja fazer: \n\n" 
 													+ "(1) Cadastrar aluno.\n"
-													+ "(2) Cadastro de despesas.\n"
-													+ "(3) Cadastro de categoria.\n"
-													+ "(4) Imprime alunos.\n"
-													+ "(5) Imprime despesas.\n"
-													+ "(6) Imprime categorias.\n"
+													+ "(2) Cadastrar despesas.\n"
+													+ "(3) Cadastrar categoria.\n"
+													+ "(4) Imprimir alunos.\n"
+													+ "(5) Imprimir despesas.\n"
+													+ "(6) Imprimir categorias.\n"
 													+ "(7) Calcular pagamento.\n\n"
 													+ "(0) Sair\n");
 		
@@ -76,9 +76,9 @@ public class Main {
 			
 			do {
 				
-				String strregraDeNegocio = JOptionPane.showInputDialog("Escolha o modo de cobrança:\n\n"
+				String strregraDeNegocio = JOptionPane.showInputDialog("Escolha o modo com que cada morador vai contribuir:\n\n"
 						+ "(1) Regra igualitaria.\n"
-						+ "(2) Regra proposcional.\n\n"
+						+ "(2) Regra proporcional.\n\n"
 						+ "(0) Voltar ao menu.\n");
 
 				regraDeNegocio = Integer.parseInt(strregraDeNegocio);
@@ -105,7 +105,7 @@ public class Main {
 				
 				default:
 					// opcao invalida
-					JOptionPane.showMessageDialog(null, "Opção invalida!!");
+					JOptionPane.showMessageDialog(null, "Escolha invalida!!");
 					
 					break;
 						
@@ -126,7 +126,7 @@ public class Main {
 			
 		default:
 			// opcao invalida
-			JOptionPane.showMessageDialog(null, "Opção invalida!!");
+			JOptionPane.showMessageDialog(null, "Escolha invalida!!");
 			
 			break;
 		}

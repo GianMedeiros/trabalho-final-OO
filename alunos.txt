@@ -1,3 +1,2 @@
-rapha;rapha@test;20.0
-gian;gian@test;10.0
-cleiton;cleiton@test;5.0
+Raphaela;rapha@ela;10.8
+Pedro;pedro@sgs;8.0
