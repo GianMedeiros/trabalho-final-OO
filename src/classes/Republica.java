@@ -21,36 +21,75 @@ public class Republica {
 		alunos = new LinkedList<Aluno>();
 	}
 
+	public class CategoriaNaoInformadaException extends Exception { 
+		public CategoriaNaoInformadaException() {
+		}
+	}
+
+	public class DescricaoNaoInformadaException extends Exception { 
+		public DescricaoNaoInformadaException() {
+		}
+	}
+
+	public class ValorNaoInformadoException extends Exception { 
+		public ValorNaoInformadoException() {
+		}
+	}
 
 	public void cadastraDespesa(boolean info, String strDescricao, String strCategoria, String strSubcategoria, String strValorDespesa) {
 		
-		if (!info) {
-			strDescricao = JOptionPane.showInputDialog("Informe a descricao da despesa:");
-			strCategoria = JOptionPane.showInputDialog("Informe a categoria da despesa:");
-			strSubcategoria = JOptionPane.showInputDialog("Informe a subcategoria da despesa (caso nao tenha, deixe em branco):");
-			strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
+		try{
+			if (!info) {
+				strDescricao = JOptionPane.showInputDialog("Informe a descricao da despesa:");
+				strCategoria = JOptionPane.showInputDialog("Informe a categoria da despesa:");
+				strSubcategoria = JOptionPane.showInputDialog("Informe a subcategoria da despesa (caso nao tenha, deixe em branco):");
+				strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
+				
+			}
+			if(strDescricao.isEmpty())
+			{
+				throw new DescricaoNaoInformadaException();
+			}
+			if(strCategoria.isEmpty())
+			{
+				throw new CategoriaNaoInformadaException();
+			}
+			if(strValorDespesa.isEmpty())
+			{
+				throw new ValorNaoInformadoException();
+			}
 			
-		}
-		
-		float vDespesa = Float.parseFloat(strValorDespesa);
-		Despesa d = new Despesa(strDescricao, strCategoria, strSubcategoria, vDespesa);
+			float vDespesa = Float.parseFloat(strValorDespesa);
+			Despesa d = new Despesa(strDescricao, strCategoria, strSubcategoria, vDespesa);
 
 
-		Despesa[] temp2 = new Despesa[despesas.length + 1];
-		for (int i=0; i<despesas.length; i++) {
-			temp2[i] = despesas[i];
-		}
-		
-		temp2[despesas.length] = d;
-		despesas = temp2;
-
-		if(!info) {
-			JOptionPane.showMessageDialog(null, "Despesa cadastrada com sucesso");
-			gravarArquivoDespesas();
-			JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
+			Despesa[] temp2 = new Despesa[despesas.length + 1];
+			for (int i=0; i<despesas.length; i++) {
+				temp2[i] = despesas[i];
+			}
 			
+			temp2[despesas.length] = d;
+			despesas = temp2;
+
+			if(!info) {
+				JOptionPane.showMessageDialog(null, "Despesa cadastrada com sucesso");
+				gravarArquivoDespesas();
+				JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
+				
+			}
 		}
-		
+		catch(CategoriaNaoInformadaException cni)
+		{
+			JOptionPane.showMessageDialog(null, "Informe a categoria!");
+		}
+		catch(DescricaoNaoInformadaException dni)
+		{
+			JOptionPane.showMessageDialog(null, "Descreva a despesa!");
+		}
+		catch(ValorNaoInformadoException vni)
+		{
+			JOptionPane.showMessageDialog(null, "Informe o valor da despesa!");
+		}
 	}
 
 	public class DadosPessoaisIncompletosException extends Exception { 
@@ -121,27 +160,6 @@ public class Republica {
 				{
 					JOptionPane.showMessageDialog(null, "Rendimento invalido!");
 				}
-		}
-
-
-		
-
-		double vRendimentos = Double.parseDouble(strRendimentos);
-		
-		Aluno a = new Aluno(strNome, strEmail, vRendimentos);
-		
-		boolean resposta = alunos.add(a);
-		if (resposta) {
-			
-			if(!info) {
-				
-				JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
-				gravarArquivoAluno();
-				JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
-			}
-			
-		} else {
-			JOptionPane.showMessageDialog(null, "Erro em cadastrar aluno!!");
 		}
 		
 	}
