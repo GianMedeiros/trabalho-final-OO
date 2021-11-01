@@ -2,6 +2,7 @@ package classes;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +16,9 @@ public class Republica {
 	Despesa[] despesas = new Despesa[0];
 
 	String arquivoAlunos = "alunos.txt";
-	String arquivoDespesas = "despesas.txt";
+	String arquivoDespesas;
+	private static int mes;
+	private static int ano;
 	
 	public Republica() {
 		alunos = new LinkedList<Aluno>();
@@ -280,6 +283,22 @@ public class Republica {
 		
 		String linha = null;
 		
+		String novoAno = JOptionPane.showInputDialog("Digite o ano que deseja cadastrar as despesas:\n");
+		ano = Integer.parseInt(novoAno);
+		String novoMes = JOptionPane.showInputDialog("Digite o mês que deseja cadastrar as despesas:\n");
+		mes = Integer.parseInt(novoMes);
+		
+		arquivoDespesas = "despesas_" + mes + "_" + ano + ".txt";
+		
+		File despesasTxt = new File("despesas_" + mes + "_" + ano + ".txt");
+		if(despesasTxt.exists() && !despesasTxt.isDirectory()) { 
+		    // lê o arquivo normalmente
+			
+		}else {
+			// cria novo arquivo
+			novoDespesaTxt(mes, ano);
+		}
+		
 		try {
 			in = new FileReader(arquivoDespesas);
 			buffer = new BufferedReader(in);
@@ -305,6 +324,20 @@ public class Republica {
 		
 		
 		return false;
+	}
+	
+	public void novoDespesaTxt(int mes, int ano) {
+		
+		FileWriter novoArquivoDes;
+		
+		try {
+			novoArquivoDes = new FileWriter(new File("despesas_" + mes + "_" + ano + ".txt"));
+			novoArquivoDes.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	public double getTotalDespesas() {
