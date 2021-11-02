@@ -1,5 +1,7 @@
 package classes;
 
+import javax.swing.JOptionPane;
+
 public class Despesa {
 	
 
@@ -11,7 +13,7 @@ public class Despesa {
 	public Despesa(String descriInf, String categoria, String subcategoria, double despesaInf) {	
 
 		
-		novaCat = new Categoria(categoria);
+		novaCat = new Categoria(categoria, subcategoria);
 		this.descricaoDespesa = descriInf;
 		this.valor = despesaInf;
 		totalDespesas += despesaInf;
@@ -42,6 +44,8 @@ public class Despesa {
 
 	@Override
 	public String toString() {
+		String res = descricaoDespesa + ";" + novaCat.getDescriCat() + ";" + novaCat.novaSubcat.getSubcategoria() + ";" + valor;
+		JOptionPane.showMessageDialog(null, res);
 		return descricaoDespesa + ";" + novaCat.getDescriCat() + ";" + novaCat.novaSubcat.getSubcategoria() + ";" + valor;
 	}
 	
