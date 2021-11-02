@@ -19,7 +19,7 @@ Trabalho da disciplina Orientação a Objeto
 https://app.diagrams.net/#G14TO_bCJz5bud0JUKGlsh6U-lit3eUiPP
 
 ![uml1](imagens/uml1.png)
-![uml2](imagens/uml2.png)
+
 
 ## Enunciado do trabalho
 
