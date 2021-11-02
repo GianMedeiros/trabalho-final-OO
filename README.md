@@ -16,7 +16,7 @@ Trabalho da disciplina Orientação a Objeto
 
 ## Diagrama de Classes
 
-https://drive.google.com/file/d/14TO_bCJz5bud0JUKGlsh6U-lit3eUiPP/view?usp=sharing
+https://app.diagrams.net/#G14TO_bCJz5bud0JUKGlsh6U-lit3eUiPP
 
 ## Enunciado do trabalho
 
