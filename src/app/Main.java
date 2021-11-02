@@ -62,7 +62,7 @@ public class Main {
 			
 		case 3:
 			// cria novo cadastro de categoria
-			novaRepublica.cadastrarCategoria();
+			novaRepublica.cadastrarCategoria(false, null, null);
 			
 			break;
 		

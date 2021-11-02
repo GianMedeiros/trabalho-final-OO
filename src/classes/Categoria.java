@@ -18,16 +18,23 @@ public class Categoria {
 
 	}
 	
-	public void cadastraSubcategoria() {
+	public void cadastraSubcategoria(boolean info, String strDescriSubcat) {
 		
-		String strDescriSubcat = JOptionPane.showInputDialog("Informe a descricao da subcategoria:");
+		if(!info) {
+			strDescriSubcat = JOptionPane.showInputDialog("Informe a descricao da subcategoria:");
+			
+		}
 
 		Subcategoria s = new Subcategoria(strDescriSubcat);
 
 		subcategorias.add(s);
 
-		String resposta = "subcategoria cadastrada!"; 
-		JOptionPane.showMessageDialog(null, resposta);
+		
+		if(!info) {
+			String resposta = "subcategoria cadastrada!"; 
+			JOptionPane.showMessageDialog(null, resposta);			
+			
+		}
 
 	}
 

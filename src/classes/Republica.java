@@ -161,29 +161,37 @@ public class Republica {
 			
 		}
 	
-	public void cadastrarCategoria() {
+	public void cadastrarCategoria(boolean info, String strDescriCat, String strOpcaoSubcat) {
 
-		String strDescriCat = JOptionPane.showInputDialog("Informe a descricao da categoria:");
+		if(!info) {
+			strDescriCat = JOptionPane.showInputDialog("Informe a descricao da categoria:");
+			
+		}
 
 		Categoria c = new Categoria(strDescriCat, null);
 
 		categorias.add(c);
 
-		String resposta = "Categoria cadastrada!"; 
-		JOptionPane.showMessageDialog(null, resposta);
-
-		int opcaoSubcat = 0;
-		do {
-			String strOpcaoSubcat = JOptionPane.showInputDialog("A categoria informada possui uma nova subcategoria?\n\n"
-																+ "(1) Sim.\n"
-																+ "(2) Nao.\n");
-			opcaoSubcat = Integer.parseInt(strOpcaoSubcat);
-
-			if(opcaoSubcat == 1) {
-				c.cadastraSubcategoria();
-			}
-
-		}while (opcaoSubcat == 1);
+		if(!info) {
+			String resposta = "Categoria cadastrada!"; 
+			JOptionPane.showMessageDialog(null, resposta);
+			
+			int opcaoSubcat = 0;
+			do {
+				strOpcaoSubcat = JOptionPane.showInputDialog("A categoria informada possui uma nova subcategoria?\n\n"
+						+ "(1) Sim.\n"
+						+ "(2) Nao.\n");
+				opcaoSubcat = Integer.parseInt(strOpcaoSubcat);
+				
+				if(opcaoSubcat == 1) {
+					c.cadastraSubcategoria(false, strOpcaoSubcat);
+				}
+				
+			}while (opcaoSubcat == 1);
+			
+		}else {
+			c.cadastraSubcategoria(true, strOpcaoSubcat);
+		}
 	}
 
 	
@@ -403,6 +411,7 @@ public class Republica {
 				if (linha != null) {
 					String[] registro = linha.split(";");
 					cadastraDespesa(true, registro[0], registro[1], registro[2], registro[3]);
+					cadastrarCategoria(true, registro[1], registro[2]);
 				}
 			} while (linha != null);
 			
