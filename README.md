@@ -28,11 +28,11 @@ Elas são estruturadas da seguinte forma:
 
 ### Classe Aluno
 
-Encapsulada como pública, ou seja, pertencente a todo o objeto;
-Criada como um método construtor para as variáveis “nome, email e rendimento”;
-As funções get (Nome, Email, Rendimentos) são públicas e pertencentes a todo o objeto;
-As variáveis nome e email são privadas, sendo assim, pertencentes apenas a classe Alunos;
-As funções get (totalAluno e totalRendimentos) são privadas e estáticas, isto é, pertencentes apenas à classe Aluno e comum a todos os objetos dessa classe; 
+Encapsulada como pública, ou seja, pertencente a todo o objeto;<br/><br/>
+Criada como um método construtor para as variáveis “nome, email e rendimento”;<br/><br/>
+As funções get (Nome, Email, Rendimentos) são públicas e pertencentes a todo o objeto;<br/><br/>
+As variáveis nome e email são privadas, sendo assim, pertencentes apenas a classe Alunos;<br/><br/>
+As funções get (totalAluno e totalRendimentos) são privadas e estáticas, isto é, pertencentes apenas à classe Aluno e comum a todos os objetos dessa classe; <br/><br/>
 A função ‘to string’ foi sobrescrita a partir do polimorfismo. 
 
 
