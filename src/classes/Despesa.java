@@ -7,17 +7,16 @@ public class Despesa {
 	private double valor;
 	private Categoria novaCat;
 	private static double totalDespesas;
-	
+
 	public Despesa(String descriInf, String categoria, String subcategoria, double despesaInf) {	
 
 		
-		novaCat = new Categoria(categoria, subcategoria);
+		novaCat = new Categoria(categoria);
 		this.descricaoDespesa = descriInf;
 		this.valor = despesaInf;
 		totalDespesas += despesaInf;
 	}
 	
-
 	public String getCategoria() {
 		return novaCat.getDescriCat();
 	}
@@ -42,7 +41,7 @@ public class Despesa {
 
 	@Override
 	public String toString() {
-		return descricaoDespesa + ";" + novaCat.getDescriCat() + ";" + novaCat.subcategoria.getSubcategoria() + ";" + valor;
+		return descricaoDespesa + ";" + novaCat.getDescriCat() + ";" + novaCat.novaSubcat.getSubcategoria() + ";" + valor;
 	}
 	
 }

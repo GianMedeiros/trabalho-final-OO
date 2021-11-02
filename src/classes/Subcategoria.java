@@ -10,6 +10,10 @@ public class Subcategoria {
 		
 	}
 	
+	public Subcategoria() {
+		
+	}
+	
 	public String getSubcategoria() {
 		return subcategoria;
 	}

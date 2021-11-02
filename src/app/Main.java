@@ -55,7 +55,7 @@ public class Main {
 			
 		case 3:
 			// cria novo cadastro de categoria
-			JOptionPane.showMessageDialog(null, "função ainda não feita!!");
+			novaRepublica.cadastrarCategoria();
 			
 			break;
 		
@@ -133,7 +133,6 @@ public class Main {
 		}
 			
 	}while(opcao != 0);
-	
 
 	}
 	

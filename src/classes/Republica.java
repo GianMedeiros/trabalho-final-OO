@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class Republica {
 	
 	List<Aluno> alunos;
+	List<Categoria> categorias = new LinkedList<Categoria>();
 	Despesa[] despesas = new Despesa[0];
 
 	String arquivoAlunos = "alunos.txt";
@@ -44,15 +45,16 @@ public class Republica {
 		try{
 			if (!info) {
 				strDescricao = JOptionPane.showInputDialog("Informe a descricao da despesa:");
-				strCategoria = JOptionPane.showInputDialog("Informe a categoria da despesa:");
-				strSubcategoria = JOptionPane.showInputDialog("Informe a subcategoria da despesa (caso nao tenha, deixe em branco):");
+				String[] strResposta = escolheCategoria().split(";");
+				strCategoria = strResposta[0];
+				strSubcategoria = strResposta[1];
 				strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
 				
 			}
 			if(strDescricao.isEmpty())
-			{
+			/*{
 				throw new DescricaoNaoInformadaException();
-			}
+			}*/
 			if(strCategoria.isEmpty())
 			{
 				throw new CategoriaNaoInformadaException();
@@ -82,10 +84,10 @@ public class Republica {
 			}
 		}
 		catch(CategoriaNaoInformadaException cni)
-		{
+		/*{
 			JOptionPane.showMessageDialog(null, "Informe a categoria!");
 		}
-		catch(DescricaoNaoInformadaException dni)
+		catch(DescricaoNaoInformadaException dni)*/
 		{
 			JOptionPane.showMessageDialog(null, "Descreva a despesa!");
 		}
@@ -167,6 +169,31 @@ public class Republica {
 		
 	}
 	
+	public void cadastrarCategoria() {
+		
+		String strDescriCat = JOptionPane.showInputDialog("Informe a descricao da categoria:");
+		
+		Categoria c = new Categoria(strDescriCat);
+
+		categorias.add(c);
+		
+		String resposta = "Categoria cadastrada!"; 
+		JOptionPane.showMessageDialog(null, resposta);
+		
+		int opcaoSubcat = 0;
+		do {
+			String strOpcaoSubcat = JOptionPane.showInputDialog("A categoria informada possui uma nova subcategoria?\n\n"
+																+ "(1) Sim.\n"
+																+ "(2) Nao.\n");
+			opcaoSubcat = Integer.parseInt(strOpcaoSubcat);
+			
+			if(opcaoSubcat == 1) {
+				c.cadastraSubcategoria();
+			}
+			
+		}while (opcaoSubcat == 1);
+	}
+	
 	public void imprimeAlunos() {
 		
 		for (Aluno p: alunos) {
@@ -191,7 +218,8 @@ public class Republica {
 		for (int i=0; i<despesas.length; i++) {
 			String resposta = "Despesa '" + despesas[i].getDescricao() + "' "
 					+ "da categoria '" + despesas[i].getCategoria()
-					+ "' (" + despesas[i].getNovaCat().getSubcat() + ")\n"
+					+ "' \n"
+					//(" + despesas[i].getNovaCat().getSubcat() + ")\n"
 					+ "valor: " + despesas[i].getValor() + "\n";
 					
 			JOptionPane.showMessageDialog(null, resposta);
@@ -200,12 +228,40 @@ public class Republica {
 		String resposta2 = "Valor total das despesas: " + Despesa.getTotalDespesas() + "\n"; 		
 		JOptionPane.showMessageDialog(null, resposta2);
 	}
-
-	// Função ainda não implementada
-	public void imprimeCategorias() {
+	
+	public String escolheCategoria() {
+		
+		String resposta = "";
+		String catEscolhida = "";
+		String subcatEscolhida = "";
+		int i = 0;
+		for(Categoria cat : categorias) {
+			resposta += "(" + (i + 1) + ") " + cat.getDescriCat() + "\n";
+			i++;
+		}
+		
+		String strTeste = JOptionPane.showInputDialog("A qual categoria pertence a despesa informada?\n\n"
+														+ resposta + "\n");
+		int opcaoCat = Integer.parseInt(strTeste);
+		i = 0;
+		
+		for(Categoria cat2 : categorias) {
+			if(i == (opcaoCat - 1)) {
+				catEscolhida = cat2.getDescriCat();
+				if(cat2.existeSubcat() == true) {
+					subcatEscolhida = cat2.escolheSubcat();
+				}else {
+					subcatEscolhida = "";
+				}
+			}
+			i++;
+		}
+		
+		String resposta2 = catEscolhida + ";" + subcatEscolhida;
+		
+		return resposta2;
 		
 	}
-	
 
 	public boolean gravarArquivoAluno() {
 		// Metodo para adicionar aluno ao arquivo alunos.txt
