@@ -16,6 +16,6 @@ public class Subcategoria {
 
 	
 	public String getSubcategoria() {
-		return subcategoria;
+		return this.subcategoria;
 	}
 }

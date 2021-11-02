@@ -198,7 +198,7 @@ public class Republica {
 		for (int i=0; i<despesas.length; i++) {
 			String resposta = "Despesa: " + despesas[i].getDescricao() + "\n"
 					+ "Categoria: " + despesas[i].getCategoria() + "\n"
-//					+ "Subcategoria: " + despesas[i].getNovaCat().getSubcat() + "\n\n"
+					+ "Subcategoria: " + despesas[i].getNovaCat().novaSubcat.getSubcategoria() + "\n\n"
 					+ "valor: " + despesas[i].getValor() + "\n\n";
 					
 			JOptionPane.showMessageDialog(null, resposta);
