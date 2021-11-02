@@ -7,7 +7,7 @@ public class Despesa {
 	private double valor;
 	private Categoria novaCat;
 	private static double totalDespesas;
-
+	
 	public Despesa(String descriInf, String categoria, String subcategoria, double despesaInf) {	
 
 		
@@ -17,6 +17,7 @@ public class Despesa {
 		totalDespesas += despesaInf;
 	}
 	
+
 	public String getCategoria() {
 		return novaCat.getDescriCat();
 	}

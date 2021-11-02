@@ -51,14 +51,6 @@ public class Republica {
 				strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
 				
 			}
-			if(strDescricao.isEmpty())
-			/*{
-				throw new DescricaoNaoInformadaException();
-			}*/
-			if(strCategoria.isEmpty())
-			{
-				throw new CategoriaNaoInformadaException();
-			}
 			if(strValorDespesa.isEmpty())
 			{
 				throw new ValorNaoInformadoException();
@@ -82,14 +74,6 @@ public class Republica {
 				JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
 				
 			}
-		}
-		catch(CategoriaNaoInformadaException cni)
-		/*{
-			JOptionPane.showMessageDialog(null, "Informe a categoria!");
-		}
-		catch(DescricaoNaoInformadaException dni)*/
-		{
-			JOptionPane.showMessageDialog(null, "Descreva a despesa!");
 		}
 		catch(ValorNaoInformadoException vni)
 		{
@@ -118,88 +102,84 @@ public class Republica {
 	}
 
 	public void cadastraAluno(boolean info, String strNome, String strEmail, String strRendimentos) {
-		
-		
-		if (!info) {
-				try{
-					strNome = JOptionPane.showInputDialog("Informe o nome do aluno:");
-					strEmail = JOptionPane.showInputDialog("Informe o email do aluno:");
-					strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos do aluno:");
-
-					if(strNome.isEmpty()||strEmail.isEmpty()||strRendimentos.isEmpty())
-					{
-						throw new DadosPessoaisIncompletosException();
-					}
-					else if(Double.parseDouble(strRendimentos)<0)
-					{
-						throw new RendimentoInvalidoException();
-					}
-								
-				double vRendimentos = Double.parseDouble(strRendimentos);
+			
+		try{
+			if (!info) {
+				strNome = JOptionPane.showInputDialog("Informe o nome do aluno:");
+				strEmail = JOptionPane.showInputDialog("Informe o email do aluno:");
+				strRendimentos = JOptionPane.showInputDialog("Informe o valor total dos redimentos do aluno:");
+			}
+	
+			if(strNome.isEmpty()||strEmail.isEmpty()||strRendimentos.isEmpty())
+			{
+				throw new DadosPessoaisIncompletosException();
+			}
+			else if(Double.parseDouble(strRendimentos)<0)
+			{
+				throw new RendimentoInvalidoException();
+			}
+							
+			double vRendimentos = Double.parseDouble(strRendimentos);
+			
+			Aluno a = new Aluno(strNome, strEmail, vRendimentos);
+			
+			boolean resposta = alunos.add(a);
+			if (resposta) {
 				
-				Aluno a = new Aluno(strNome, strEmail, vRendimentos);
-				
-				boolean resposta = alunos.add(a);
-				if (resposta) {
+				if(!info) {
 					
-					if(!info) {
-						
-						JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
-						gravarArquivoAluno();
-						JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
-					}
-						
-					} else {
-						JOptionPane.showMessageDialog(null, "Erro em cadastrar aluno!!");
-					}
+					JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
+					gravarArquivoAluno();
+					JOptionPane.showMessageDialog(null, "arquivo atualizado!!");
 				}
-				catch(DadosPessoaisIncompletosException dp)
-				{
-					JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+					
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro em cadastrar aluno!!");
 				}
-				catch(RendimentoInvalidoException ri)
-				{
-					JOptionPane.showMessageDialog(null, "Rendimento invalido!");
-				}
-				catch(NumberFormatException nf)
-				{
-					JOptionPane.showMessageDialog(null, "Rendimento invalido!");
-				}
+			}catch(DadosPessoaisIncompletosException dp)	{
+				JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+				
+			}catch(RendimentoInvalidoException ri)	{
+				JOptionPane.showMessageDialog(null, "Rendimento invalido!");
+				
+			}catch(NumberFormatException nf)	{
+				JOptionPane.showMessageDialog(null, "Rendimento invalido!");
+			}
+			
 		}
-		
-	}
 	
 	public void cadastrarCategoria() {
-		
+
 		String strDescriCat = JOptionPane.showInputDialog("Informe a descricao da categoria:");
-		
+
 		Categoria c = new Categoria(strDescriCat);
 
 		categorias.add(c);
-		
+
 		String resposta = "Categoria cadastrada!"; 
 		JOptionPane.showMessageDialog(null, resposta);
-		
+
 		int opcaoSubcat = 0;
 		do {
 			String strOpcaoSubcat = JOptionPane.showInputDialog("A categoria informada possui uma nova subcategoria?\n\n"
 																+ "(1) Sim.\n"
 																+ "(2) Nao.\n");
 			opcaoSubcat = Integer.parseInt(strOpcaoSubcat);
-			
+
 			if(opcaoSubcat == 1) {
 				c.cadastraSubcategoria();
 			}
-			
+
 		}while (opcaoSubcat == 1);
 	}
+
 	
 	public void imprimeAlunos() {
 		
-		for (Aluno p: alunos) {
-			String resposta = "Nome do aluno: " + p.getNome() + "\n"
-					+ "Email: " + p.getEmail() + "\n"
-					+ "Redimentos totais: " + p.getRendimentos();
+		for (Aluno a: alunos) {
+			String resposta = "Nome do aluno: " + a.getNome() + "\n"
+					+ "Email: " + a.getEmail() + "\n"
+					+ "Redimentos totais: " + a.getRendimentos();
 				
 			JOptionPane.showMessageDialog(null, resposta);
 
@@ -216,11 +196,10 @@ public class Republica {
 	public void imprimeDespesas() {
 		
 		for (int i=0; i<despesas.length; i++) {
-			String resposta = "Despesa '" + despesas[i].getDescricao() + "' "
-					+ "da categoria '" + despesas[i].getCategoria()
-					+ "' \n"
-					//(" + despesas[i].getNovaCat().getSubcat() + ")\n"
-					+ "valor: " + despesas[i].getValor() + "\n";
+			String resposta = "Despesa: " + despesas[i].getDescricao() + "\n"
+					+ "Categoria: " + despesas[i].getCategoria() + "\n"
+//					+ "Subcategoria: " + despesas[i].getNovaCat().getSubcat() + "\n\n"
+					+ "valor: " + despesas[i].getValor() + "\n\n";
 					
 			JOptionPane.showMessageDialog(null, resposta);
 		}
@@ -228,9 +207,10 @@ public class Republica {
 		String resposta2 = "Valor total das despesas: " + Despesa.getTotalDespesas() + "\n"; 		
 		JOptionPane.showMessageDialog(null, resposta2);
 	}
-	
+
+
 	public String escolheCategoria() {
-		
+
 		String resposta = "";
 		String catEscolhida = "";
 		String subcatEscolhida = "";
@@ -239,12 +219,12 @@ public class Republica {
 			resposta += "(" + (i + 1) + ") " + cat.getDescriCat() + "\n";
 			i++;
 		}
-		
+
 		String strTeste = JOptionPane.showInputDialog("A qual categoria pertence a despesa informada?\n\n"
 														+ resposta + "\n");
 		int opcaoCat = Integer.parseInt(strTeste);
 		i = 0;
-		
+
 		for(Categoria cat2 : categorias) {
 			if(i == (opcaoCat - 1)) {
 				catEscolhida = cat2.getDescriCat();
@@ -256,9 +236,9 @@ public class Republica {
 			}
 			i++;
 		}
-		
+
 		String resposta2 = catEscolhida + ";" + subcatEscolhida;
-		
+
 		return resposta2;
 		
 	}
@@ -294,6 +274,12 @@ public class Republica {
 		FileReader in = null;
 		
 		String linha = null;
+		
+		File alunosTxt = new File("alunos.txt");
+		if(!alunosTxt.exists() && alunosTxt.isDirectory()) { 
+			// cria novo arquivo
+			novoDespesaTxt(mes, ano);	
+		}
 		
 		try {
 
@@ -350,23 +336,44 @@ public class Republica {
 		
 	}
 	
-	public boolean lerArquivoDespesas() {
+	public boolean lerArquivoDespesas() throws DadosPessoaisIncompletosException, RendimentoInvalidoException{
 		
 		BufferedReader buffer = null;
 		FileReader in = null;
 		
 		String linha = null;
 		
-		String novoAno = JOptionPane.showInputDialog("Digite o ano que deseja cadastrar as despesas:\n");
-		ano = Integer.parseInt(novoAno);
-		String novoMes = JOptionPane.showInputDialog("Digite o mês que deseja cadastrar as despesas:\n");
-		mes = Integer.parseInt(novoMes);
+		try {
+			String novoAno = JOptionPane.showInputDialog("Digite o ANO que deseja cadastrar as despesas:\n");
+			String novoMes = JOptionPane.showInputDialog("Digite o MES que deseja cadastrar as despesas:\n");
+			
+			if(novoAno.isEmpty()||novoMes.isEmpty())
+			{
+				throw new DadosPessoaisIncompletosException();
+			}
+			else if(Double.parseDouble(novoAno)<0||Double.parseDouble(novoMes)<1||Double.parseDouble(novoMes)>12)
+			{
+				throw new RendimentoInvalidoException();
+			}
+			
+			ano = Integer.parseInt(novoAno);
+			mes = Integer.parseInt(novoMes);
+			
+		}catch(DadosPessoaisIncompletosException dp) {
+			JOptionPane.showMessageDialog(null, "Preencha os campos ano/mes corretamente!");
+			lerArquivoDespesas();
+		}catch(RendimentoInvalidoException ri) {
+			JOptionPane.showMessageDialog(null, "Valor ano/mes invalidos invalido!");
+			lerArquivoDespesas();
+		}catch(NumberFormatException nf) {
+			JOptionPane.showMessageDialog(null, "Valor ano/mes invalidos invalido!");
+		}
 		
 		arquivoDespesas = "despesas_" + mes + "_" + ano + ".txt";
 		
 		File despesasTxt = new File("despesas_" + mes + "_" + ano + ".txt");
 		if(despesasTxt.exists() && !despesasTxt.isDirectory()) { 
-		    // lê o arquivo normalmente
+		    // lÃª o arquivo normalmente
 			
 		}else {
 			// cria novo arquivo
@@ -429,6 +436,43 @@ public class Republica {
 	
 	public List<Aluno> getAlunos() {
 		return alunos;
+	}
+	
+	public void regraIgualitaria(Republica novaRepublica) {
+		double porcentagem = (100.0 / novaRepublica.getTotalAlunos());
+		double valorPago = (novaRepublica.getTotalDespesas() / novaRepublica.getTotalAlunos());
+
+		// formatando resposta
+
+		String strporcentagem = String.format("%.2f", porcentagem);
+		String strvalorPago = String.format("%.2f", valorPago);
+
+		for (int i=0; i<novaRepublica.getAlunos().size(); i++) {
+			String resposta = novaRepublica.getAlunos().get(i).getNome()
+					+ " devera pagar a porcentagem de " + strporcentagem + "% "
+					+ "ou R$ " + strvalorPago;
+			
+			JOptionPane.showMessageDialog(null, resposta);
+		}
+	}
+
+	public void regraProporcional(Republica novaRepublica) {
+		
+		for (int i=0; i<novaRepublica.getAlunos().size(); i++) {
+			double porcentagem = (novaRepublica.getAlunos().get(i).getRendimentos() * 100) / novaRepublica.getRendimentoTotal();
+			double valorPago = (porcentagem * novaRepublica.getTotalDespesas()) / 100;
+			
+			// formatando resposta
+			String strporcentagem = String.format("%.2f", porcentagem);
+			String strvalorPago = String.format("%.2f", valorPago);
+			
+			String resposta = novaRepublica.getAlunos().get(i).getNome()
+					+ " devera pagar a porcentagem de " + strporcentagem + "% "
+					+ "ou R$ " + strvalorPago;
+				
+			JOptionPane.showMessageDialog(null, resposta);
+					
+		}
 	}
 
 

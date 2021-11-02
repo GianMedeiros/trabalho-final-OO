@@ -2,7 +2,7 @@ package classes;
 
 public class Subcategoria {
 	
-	String subcategoria;
+	private String subcategoria;
 	
 	public Subcategoria(String subcatInf) {
 		
@@ -11,8 +11,9 @@ public class Subcategoria {
 	}
 	
 	public Subcategoria() {
-		
+
 	}
+
 	
 	public String getSubcategoria() {
 		return subcategoria;
