@@ -40,7 +40,7 @@ public class Republica {
 		}
 	}
 
-	public void cadastraDespesa(boolean info, String strDescricao, String strCategoria, String strSubcategoria, String strValorDespesa) {
+	public void cadastraDespesa(boolean info, String strDescricao, String strCategoria, String strSubcategoria, String strValorDespesa) throws DadosPessoaisIncompletosException, RendimentoInvalidoException {
 		
 		try{
 			if (!info) {
@@ -51,11 +51,21 @@ public class Republica {
 				strValorDespesa = JOptionPane.showInputDialog("Informe o valor da despesa:");
 				
 			}
-			if(strValorDespesa.isEmpty())
+			
+			if(strDescricao.isEmpty()||strCategoria.isEmpty()||strValorDespesa.isEmpty())
 			{
 				throw new ValorNaoInformadoException();
 			}
+			else if(Double.parseDouble(strValorDespesa)<0)
+			{
+				throw new RendimentoInvalidoException();
+			}
 			
+//			if(strValorDespesa.isEmpty())
+//			{
+//				throw new ValorNaoInformadoException();
+//			}
+//			
 			float vDespesa = Float.parseFloat(strValorDespesa);
 			Despesa d = new Despesa(strDescricao, strCategoria, strSubcategoria, vDespesa);
 
@@ -77,7 +87,10 @@ public class Republica {
 		}
 		catch(ValorNaoInformadoException vni)
 		{
-			JOptionPane.showMessageDialog(null, "Informe o valor da despesa!");
+			JOptionPane.showMessageDialog(null, "Dados em falta!");
+		}catch(RendimentoInvalidoException ri)	{
+			JOptionPane.showMessageDialog(null, "RValor de despesa invalido!");
+			
 		}
 	}
 
@@ -152,7 +165,7 @@ public class Republica {
 
 		String strDescriCat = JOptionPane.showInputDialog("Informe a descricao da categoria:");
 
-		Categoria c = new Categoria(strDescriCat);
+		Categoria c = new Categoria(strDescriCat, null);
 
 		categorias.add(c);
 

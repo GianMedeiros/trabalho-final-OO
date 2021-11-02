@@ -11,10 +11,10 @@ public class Categoria {
 	Subcategoria novaSubcat;
 	List<Subcategoria> subcategorias = new LinkedList<Subcategoria>();
 
-	public Categoria(String descriInf) {
+	public Categoria(String descriInf, String subcategoria) {
 
 		this.descricaoCategoria = descriInf;
-		novaSubcat = new Subcategoria();
+		novaSubcat = new Subcategoria(subcategoria);
 
 	}
 	
