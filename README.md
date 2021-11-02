@@ -36,35 +36,39 @@ As funções get (totalAluno e totalRendimentos) são privadas e estáticas, ist
 A função ‘to string’ foi sobrescrita a partir do polimorfismo. 
 
 
+
 ### Classe Categoria
 
-Encapsulada como pública, ou seja, pertencente a todo o objeto;
-Faz uso da classe Subcategoria já existente no objeto, para armazenar novas subcategorias dentro de Categoria;
-As funções são públicas e pertencentes a todo o objeto;
+Encapsulada como pública, ou seja, pertencente a todo o objeto;<br/><br/>
+Faz uso da classe Subcategoria já existente no objeto, para armazenar novas subcategorias dentro de Categoria;<br/><br/>
+As funções são públicas e pertencentes a todo o objeto;<br/><br/>
 As funções Subcat, DescricaoCat e get DesriCat, são públicas e pertencentes a todo o objeto;
+
 
 
 ### Classe Subcategoria
 
-Encapsulada como pública, ou seja, pertencente a todo o objeto;
+Encapsulada como pública, ou seja, pertencente a todo o objeto;<br/><br/>
 Os objetos usados em Subcategoria são compartilhados com Categoria;
+
 
 
 ### Classe Despesa
 
-Encapsulada como pública, isto é, pertencente a todo o objeto;
-Criada como um método construtor para as variáveis “descriInf, categoria, subcategoria e despesaInf”;
-As variáveis descricaoDespesa, valor, Categoria e novaCat são privadas, pertencentes apenas a classe Despesa;
-A variável totalDespesa é privada e estática, isto é, pertencentes apenas à classe Despesa e sendo assim comum a todos os objetos dessa classe;
-Faz uso da classe Subcategoria já existente no objeto, onde a variável novaCat armazenar novas subcategorias dentro de Despesa;
+Encapsulada como pública, isto é, pertencente a todo o objeto;<br/><br/>
+Criada como um método construtor para as variáveis “descriInf, categoria, subcategoria e despesaInf”;<br/><br/>
+As variáveis descricaoDespesa, valor, Categoria e novaCat são privadas, pertencentes apenas a classe Despesa;<br/><br/>
+A variável totalDespesa é privada e estática, isto é, pertencentes apenas à classe Despesa e sendo assim comum a todos os objetos dessa classe;<br/><br/>
+Faz uso da classe Subcategoria já existente no objeto, onde a variável novaCat armazenar novas subcategorias dentro de Despesa;<br/><br/>
 As funções ‘to string’ foram sobrescritas a partir do polimorfismo. 
+
 
 
 ### Classe Republica
 
-Encapsulada como pública, isto é, pertencente a todo o objeto;
-As variáveis arquivoAlunos e arquivosDespesas são públicas e pertencentes a todo o objeto;
-As variáveis mês, ano são privadas e pertencentes apenas a classe Republica;
+Encapsulada como pública, isto é, pertencente a todo o objeto;<br/><br/>
+As variáveis arquivoAlunos e arquivosDespesas são públicas e pertencentes a todo o objeto;<br/><br/>
+As variáveis mês, ano são privadas e pertencentes apenas a classe Republica;<br/><br/>
 As variáveis CategoriaNaoInformada, DescricaoNaoInformada, ValorNaoInformado, DadosPessoaisIncompletos, RendimentoInvalido são exceções.
 
 
