@@ -1,0 +1,33 @@
+Criterios: 
+ * Crit. 1 - Os cadastros funcionam adequadamente?: OK
+ * Crit. 2 - Excecoes sao lancadas adequadamente?: NOK (-35 pontos)
+ * Crit. 3 - Associações sao realizadas adequadamente?: NOK, não há nenhuma
+   relação de heranca utilizada nas classes desenvolvidas pelo grupo. Há 
+   associações que não fazem sentido, ex, Republica --> Categoria. (-10 pontos)
+ * Crit. 4 - Calculos estao corretos?: OK
+
+Pontos positivos: 
+
+
+
+
+
+Pontos negativos: 
+
+
+
+
+
+Dúvidas: 
+
+
+
+
+
+Comentários: 
+
+
+
+
+Nota: 
+55/100 pontos.
